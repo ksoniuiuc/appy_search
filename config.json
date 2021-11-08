@@ -1,0 +1,12 @@
+{
+    "appsearch":{
+        "base_endpoint":"http://localhost:3002",
+        "api_key":"private-t9mc7n15fbkqt2er6mpd16go",
+        "engine_name":"music-search"
+    },
+    "mm_api":{
+        "url":"https://api.musixmatch.com/ws/1.1/",
+        "key":"&apikey=f0d627bb2b53f71131e082482f0d1dc0",
+        "format":"?format=json&callback=callback"
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>About Flask</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main_min.css')}}">
+</head>
+
+<body>
+    {% block content %}
+    <h1> About Flask </h1>
+    <p> Flask is a micro web framework written in Python.</p>
+    <p> Applications that use the Flask framework include Pinterest,
+        LinkedIn, and the community web page for Flask itself.</p>
+
+    <div class="justify-items-center">
+        <div class="grid gap-8 grid-cols-3 mt-5 ">
+            {% for d in data %}
+            <div
+                class="transition duration-500 ease-in-out flex py-3 px-2 hover:bg-blue-400 transform hover:-translate-y-1 hover:scale-110 hover:text-white hover:shadow-none hover:rounded border border-gray-300 shadow-lg">
+                <!-- <img src="{{ d.artist_name }}" class="h-16 w-12 mr-20 ml-8 mt-10" alt="Image"> -->
+                <div class="w-3/5 mr-0">
+                    <h2 class="text-gray-800 font-bold">{{ d.artist_name }}</h2>
+                    <p>{{ d.track_name }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <pre id="json">{{data}}</pre>
+
+    {% endblock %}
+</body>
+
+</html>

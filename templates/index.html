@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPY Search</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main_min.css')}}">
+</head>
+
+<body>
+    <div class="bg-gray-700 px-3 py-1">
+        <h2 class="text-3xl font-light text-white m-0">APPY Search - Home</h2>
+    </div>
+    <div class="justify-center pl-60 ml-96">
+        <form action="/search" method="POST">
+            <input type="text" placeholder="Search here..." name="search"
+                class="border-2 border-gray-700 mt-10 w-2/5 py-3 px-4"></input>
+            <button class="bg-blue-700 text-xl hover:bg-blue-500 text-white py-2 px-3">
+                Search
+            </button>
+            <p>Select Search Type:</p>
+
+            <div>
+                <input type="radio" id="artist" name="search_type" value="artist">
+                <label for="artist">Artist</label>
+            </div>
+            <div>
+                <input type="radio" id="track" name="search_type" value="track">
+                <label for="track">Track</label>
+            </div>
+            <div>
+                <input type="radio" id="lyrics" name="search_type" value="lyrics">
+                <label for="lyrics">Lyrics</label>
+            </div>
+            <p id="search_type" hidden>{{search_type}}</p>
+            <script>
+                var search_type = document.getElementById("search_type").textContent
+                if (search_type == "artist" || search_type == null) {
+                    document.getElementById("artist").checked = true;
+                }
+                else if (search_type == "track") {
+                    document.getElementById("track").checked = true;
+                }
+                else {
+                    document.getElementById("lyrics").checked = true;
+                }
+            </script>
+
+
+        </form>
+        <p class='text-xl mt-10 block font-bold justify-center'>{{api_response}}</p>
+
+
+    </div>
+    {% block content %}
+    <div class="justify-items-center">
+        <div class="grid gap-8 grid-cols-3 mt-5 ">
+            {% for d in data["results"] %}
+            <div
+                class="transition duration-500 ease-in-out flex py-3 px-2 hover:bg-blue-400 transform hover:-translate-y-1 hover:scale-110 hover:text-white hover:shadow-none hover:rounded border border-gray-300 shadow-lg">
+                <div class="w-3/5 mr-0">
+                    <h2 class="text-gray-800 font-bold">{{ d.artist_name.raw }}</h2>
+                    <p>{{ d.track_name.raw }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <script>
+            if (data == null) {
+                <p>No Data Found</p>
+            }
+        </script>
+
+    </div>
+    {% endblock %}
+</body>
+
+</html>
